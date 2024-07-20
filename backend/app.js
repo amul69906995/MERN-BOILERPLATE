@@ -43,11 +43,16 @@ app.get('/', (req, res) => {
   res.json('hello from backend and cors configured')
 })
 app.use('/users',userRoutes)
-
+//not found route
+app.use('*',(req,res)=>{
+throw new Error("route not found",404)
+})
 //error
 app.use((err, req, res, next) => {
   const { message = "something went wrong/default message to debug u have to dig dipper", statusCode = 500 } = err
   console.log("**********error**************")
+  console.log("**********error**************")
+  console.log(message,statusCode)//helps in deployment to see error 
   console.log("**********error**************")
   console.log("**********error**************")
   res.status(statusCode).json({ message })
